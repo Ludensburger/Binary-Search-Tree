@@ -8,11 +8,12 @@ int main() {
     MyBinaryTree *tree = new MyBinaryTree();
 
     // Insert nodes into the binary tree
+    // Insert nodes into the binary tree
     tree->root = tree->insert(tree->getRoot(), 50); // root node
     tree->insert(tree->root, 10);
     tree->insert(tree->root, 20);
-    tree->insert(tree->root, 30);
-    tree->insert(tree->root, 40);
+    tree->insert(tree->root->left, 30);  // Insert 30 as left child of 20
+    tree->insert(tree->root->right, 40); // Insert 40 as left child of 30
     tree->insert(tree->root, 6570);
     tree->insert(tree->root, 340);
 
