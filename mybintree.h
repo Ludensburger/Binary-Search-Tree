@@ -117,22 +117,22 @@ public:
     // Override the print method
     void print() override {
         cout << "Size: " << size << endl;
-        cout << "Root: ";
-        print(root);
+        printNode(root, 0, "Root");
     }
 
-    // Implement the print method
-    void print(node *n) {
+    // Implement the printNode method with indentation
+    void printNode(node *n, int depth, string label) {
         if (n) {
-            cout << n->elem << endl;
+            for (int i = 0; i < depth; ++i) {
+                cout << "|   ";
+            }
+            cout << "+--" << label << ": " << n->elem << endl;
             if (n->left) {
-                cout << "-L: ";
-                print(n->left);
+                printNode(n->left, depth + 1, "L");
             }
 
             if (n->right) {
-                cout << "-R: ";
-                print(n->right);
+                printNode(n->right, depth + 1, "R");
             }
         }
     }

@@ -14,11 +14,18 @@ int main() {
 
     // Insert nodes sequentially
     node *root = tree->getRoot();
+
+    // left
     node *node10 = tree->insert(root, 10);
+    // right
     node *node20 = tree->insert(root, 20);
-    node *node30 = tree->insert(node20, 30);
+
+    // right of 20
+    node *node15 = tree->insert(node20, 30);
+    node *node30 = tree->insert(node20, 15);
+    // right of 30
     node *node40 = tree->insert(node30, 40);
-    node *node6570 = tree->insert(root, 6570);
+    node *node65 = tree->insert(root, 65);
     node *node999 = tree->insert(node10, 999);
     node *node340 = tree->insert(root, 340);
 
