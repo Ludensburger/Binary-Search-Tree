@@ -8,14 +8,19 @@ int main() {
     MyBinaryTree *tree = new MyBinaryTree();
 
     // Insert nodes into the binary tree
-    // Insert nodes into the binary tree
-    tree->root = tree->insert(tree->getRoot(), 50); // root node
-    tree->insert(tree->root, 10);
-    tree->insert(tree->root, 20);
-    tree->insert(tree->root->left, 30);  // Insert 30 as left child of 20
-    tree->insert(tree->root->right, 40); // Insert 40 as left child of 30
-    tree->insert(tree->root, 6570);
-    tree->insert(tree->root, 340);
+
+    // Insert 50 as the root node
+    tree->root = tree->insert(tree->getRoot(), 50);
+
+    // Insert nodes sequentially
+    node *root = tree->getRoot();
+    node *node10 = tree->insert(root, 10);
+    node *node20 = tree->insert(root, 20);
+    node *node30 = tree->insert(node20, 30);
+    node *node40 = tree->insert(node30, 40);
+    node *node6570 = tree->insert(root, 6570);
+    node *node999 = tree->insert(node10, 999);
+    node *node340 = tree->insert(root, 340);
 
     // Print the binary tree using BFS
     cout << "BFS traversal: ";
@@ -24,6 +29,8 @@ int main() {
     // Print the binary tree using DFS
     cout << "DFS traversal: ";
     tree->DFS();
+
+    tree->print();
 
     // Searching for a key
     int key = 40;
