@@ -1,14 +1,15 @@
+#include "arrayqueue.h"
 #include "binarytree.h"
-// #include "node.h"
-#include <algorithm>
-#include <cstdlib>
+#include "node.h"
 #include <iostream>
-#include <queue>
 #include <stack>
-#include <stdexcept>
+
 using namespace std;
 
 class MyBinaryTree : public BinaryTree {
+private:
+    ArrayQueue queue;
+
 public:
     node *root;
     int size;
@@ -22,33 +23,33 @@ public:
         return root;
     }
 
+    // Override the BFS method to enqueue and dequeue node pointers
     void BFS() {
         if (!root) {
             cout << "Tree is empty" << endl;
             return;
         }
 
-        queue<node *> q;
-        q.push(root);
+        queue.enqueue(root);
 
-        while (!q.empty()) {
-            node *curr = q.front();
-            q.pop();
+        while (!queue.isEmpty()) {
+            node *curr = queue.dequeue();
 
             cout << curr->elem << " ";
 
             if (curr->left) {
-                q.push(curr->left);
+                queue.enqueue(curr->left);
             }
 
             if (curr->right) {
-                q.push(curr->right);
+                queue.enqueue(curr->right);
             }
         }
 
         cout << endl;
     }
 
+    // Implement the DFS method
     void DFS() {
         if (!root) {
             cout << "Tree is empty" << endl;
@@ -76,7 +77,8 @@ public:
         cout << endl;
     }
 
-    node *search(node *currnode, int key) {
+    // Implement the search method
+    node *search(node *currnode, int key) override {
         if (!currnode || currnode->elem == key) {
             return currnode;
         }
@@ -88,7 +90,8 @@ public:
         return search(currnode->right, key);
     }
 
-    node *insert(node *currnode, int key) {
+    // Implement the insert method
+    node *insert(node *currnode, int key) override {
         if (!currnode) {
             // If the current node is null, create a new node and return it.
             node *newNode = new node;
@@ -111,12 +114,14 @@ public:
         return currnode;
     }
 
-    void print() {
+    // Override the print method
+    void print() override {
         cout << "Size: " << size << endl;
         cout << "Root: ";
         print(root);
     }
 
+    // Implement the print method
     void print(node *n) {
         if (n) {
             cout << n->elem << endl;

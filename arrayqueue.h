@@ -1,10 +1,5 @@
-#include "arraylist.h"
-#include "list.h"
+#include "arraylist.h" // Assuming ArrayQueue is based on ArrayList
 #include "queue.h"
-#include <iostream>
-#include <queue>
-#include <stack>
-#include <stdexcept>
 
 class ArrayQueue : public Queue {
 private:
@@ -15,32 +10,32 @@ public:
         list = new ArrayList();
     }
 
-    void enqueue(int value) {
+    void enqueue(node *value) override {
         list->add(value);
     }
 
-    int dequeue() {
+    node *dequeue() override {
         if (list->getSize() == 0) {
             throw std::runtime_error("Queue is empty");
         }
-        int value = list->get(0);
+        node *value = static_cast<node *>(list->get(0));
         list->remove(0);
         return value;
     }
 
-    int get(int index) {
-        return list->get(index);
+    node *get(int index) override {
+        return static_cast<node *>(list->get(index));
     }
 
-    int size() {
+    int size() override {
         return list->getSize();
     }
 
-    bool isEmpty() {
+    bool isEmpty() override {
         return list->getSize() == 0;
     }
 
-    void print() {
+    void print() override {
         list->print();
     }
 };

@@ -1,11 +1,12 @@
 #include "list.h"
-
+#include "node.h" // Ensure you include the node.h file
 #include <iostream>
+#include <stdexcept>
 using namespace std;
 
 class ArrayList : public List {
 private:
-    int array[10];
+    node *array[10]; // Array of node pointers
     int size_;
 
 public:
@@ -13,7 +14,7 @@ public:
         size_ = 0;
     }
 
-    void add(int value) {
+    void add(node *value) override { // Override the add method from the List interface
         if (size_ == 10) {
             throw std::runtime_error("Array is full");
         }
@@ -21,18 +22,18 @@ public:
         size_++;
     }
 
-    int get(int index) {
+    node *get(int index) { // Update return type to node*
         if (index < 0 || index >= size_) {
-            throw std::runtime_error("Index out of bounds");
+            throw runtime_error("Index out of bounds");
         }
         return array[index];
     }
 
-    int remove(int index) {
+    node *remove(int index) { // Update return type to node*
         if (index < 0 || index >= size_) {
-            throw std::runtime_error("Index out of bounds");
+            throw runtime_error("Index out of bounds");
         }
-        int value = array[index];
+        node *value = array[index];
         for (int i = index; i < size_ - 1; i++) {
             array[i] = array[i + 1];
         }
@@ -46,8 +47,8 @@ public:
 
     void print() {
         for (int i = 0; i < size_; i++) {
-            std::cout << array[i] << " ";
+            cout << array[i]->elem << " "; // Assuming elem is the element in your node struct
         }
-        std::cout << std::endl;
+        cout << endl;
     }
 };
