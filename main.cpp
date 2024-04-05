@@ -7,42 +7,46 @@ int main() {
     // Create an instance of MyBinaryTree
     MyBinaryTree *tree = new MyBinaryTree();
 
-    int choice, value;
-    while (true) {
-        cout << "\n\nBinary Search Tree Operations\n";
-        cout << "1. Insert Node \n";
-        cout << "2. BFS Traversal \n";
-        cout << "3. DFS Traversal \n";
-        cout << "4. Print Tree \n";
-        cout << "5. Exit \n";
-        cout << "Enter your choice: ";
-        cin >> choice;
+    char op;
+    int value;
+    cout << "\n\nBinary Search Tree Operations\n";
+    cout << "a value - Insert Node \n";
+    cout << "\tExample: a50 " << endl;
+    cout << "b - BFS Traversal \n";
+    cout << "d - DFS Traversal \n";
+    cout << "p - Print Tree \n";
+    cout << "x - Exit \n";
 
-        switch (choice) {
-        case 1:
-            cout << "Enter the value to be inserted: ";
+
+
+    do {
+
+        cout << "Op: ";
+        cin >> op;
+
+        switch (op) {
+        case 'a':
             cin >> value;
             tree->root = tree->insert(tree->getRoot(), value);
             break;
-        case 2:
+        case 'b':
             cout << "BFS traversal: ";
             tree->BFS();
             break;
-        case 3:
+        case 'd':
             cout << "DFS traversal: ";
             tree->DFS();
             break;
-
-        case 4:
+        case 'p':
             cout << "Printing tree: ";
             tree->print();
             break;
-        case 5:
-            exit(0);
+        case 'x':
+            cout << "Exiting program.";
+            break;
         default:
-            cout << "Invalid choice, please try again.\n";
+            cout << "Invalid input.\n";
         }
-    }
-
+    } while (op != 'x');
     return 0;
 }
